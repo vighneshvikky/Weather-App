@@ -1,0 +1,78 @@
+
+<div class="relative min-h-screen bg-animate-dark overflow-hidden">
+    <!-- Animated Stars -->
+    <div class="star left-[10%] top-[20%] w-1 h-1"></div>
+    <div class="star left-[25%] top-[15%] w-2 h-2"></div>
+    <div class="star left-[40%] top-[30%] w-1 h-1"></div>
+    <div class="star left-[60%] top-[25%] w-1.5 h-1.5"></div>
+    <div class="star left-[75%] top-[40%] w-1 h-1"></div>
+    <div class="star left-[85%] top-[15%] w-2 h-2"></div>
+    <div class="star left-[15%] top-[45%] w-1.5 h-1.5"></div>
+    <div class="star left-[90%] top-[35%] w-1 h-1"></div>
+  
+    <!-- Main Content -->
+    <div class="relative py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-md mx-auto bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden md:max-w-2xl p-6 border border-gray-700">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-gray-100 flex items-center justify-center gap-2">
+            Weather App
+            <span class="text-2xl">🌤️</span>
+          </h2>
+        </div>
+  
+        <!-- Search Input -->
+        <div class="flex gap-2 mb-8">
+          <input 
+            type="text" 
+            [(ngModel)]="city"
+            placeholder="Enter city name"
+            class="flex-1 px-4 py-2 bg-gray-800 text-gray-100 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors placeholder-gray-500"
+          >
+          <button 
+            (click)="getWeather()"
+            class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+          >
+            Get Weather
+          </button>
+        </div>
+  
+        <!-- Weather Data -->
+        <div *ngIf="weatherData" class="text-center">
+          <div class="mb-6">
+            <h3 class="text-2xl font-semibold text-gray-100 mb-2">
+              {{ weatherData.location.name }}, {{ weatherData.location.country }}
+            </h3>
+            <h4 class="text-4xl font-bold text-gray-100 mb-2">
+              {{ weatherData.current.temp_c }}°C
+            </h4>
+            <p class="text-lg text-gray-300">
+              {{ weatherData.current.condition.text | titlecase }}
+            </p>
+          </div>
+  
+          <!-- Weather Images -->
+          <div class="w-full max-w-xs mx-auto">
+            <img 
+              *ngIf="weatherData.current.condition.text.toLowerCase() === 'sunny'"
+              src="sunny-image.jpg"
+              alt="Sunny Icon"
+              class="w-full h-48 object-cover rounded-lg shadow-md"
+            >
+            <img 
+              *ngIf="weatherData.current.condition.text.toLowerCase() === 'cloudy'"
+              src="cloudy-image.jpg"
+              alt="Cloudy Icon"
+              class="w-full h-48 object-cover rounded-lg shadow-md"
+            >
+            <img 
+              *ngIf="weatherData.current.condition.text.toLowerCase() === 'partly cloudy'"
+              src="partilally-cloudy-image.jpg"
+              alt="Partially Cloudy"
+              class="w-full h-48 object-cover rounded-lg shadow-md"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
